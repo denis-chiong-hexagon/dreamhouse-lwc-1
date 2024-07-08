@@ -2,7 +2,7 @@ import { LightningElement, wire } from 'lwc';
 import { publish, MessageContext } from 'lightning/messageService';
 import FILTERSCHANGEMC from '@salesforce/messageChannel/FiltersChange__c';
 
-const DELAY = 350;
+const DELAY = 1350;
 const MAX_PRICE = 1200000;
 
 export default class PropertyFilter extends LightningElement {

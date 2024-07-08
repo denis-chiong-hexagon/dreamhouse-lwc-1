@@ -9,7 +9,7 @@ import FILTERSCHANGEMC from '@salesforce/messageChannel/FiltersChange__c';
 import PROPERTYSELECTEDMC from '@salesforce/messageChannel/PropertySelected__c';
 import getPagedPropertyList from '@salesforce/apex/PropertyController.getPagedPropertyList';
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 8;
 
 export default class PropertyTileList extends LightningElement {
     pageNumber = 1;
