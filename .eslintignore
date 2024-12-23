@@ -1,0 +1,21 @@
+# Copyright (c) 2020, salesforce.com, inc.
+# All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause
+# For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+
+**/lwc/**/*.css
+**/lwc/**/*.html
+**/lwc/**/*.json
+**/lwc/**/*.svg
+**/lwc/**/*.xml
+**/aura/**/*.auradoc
+**/aura/**/*.cmp
+**/aura/**/*.css
+**/aura/**/*.design
+**/aura/**/*.evt
+**/aura/**/*.json
+**/aura/**/*.svg
+**/aura/**/*.tokens
+**/aura/**/*.xml
+**/aura/**/*.app
+.sfdx
