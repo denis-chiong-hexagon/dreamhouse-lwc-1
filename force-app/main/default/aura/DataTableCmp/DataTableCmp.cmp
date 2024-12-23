@@ -1,0 +1,90 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="public">
+
+    <!-- public attributes -->
+
+    <aura:attribute name="columns"
+                    type="Aura.Component[]"
+                    required="true"
+                    description="Array of one or more DataTableColumnCmp components."/>
+
+    <aura:attribute name="rows"
+                    type="Object[]"
+                    description="The data of the rows to display. Should have JSON property for each column name value."/>
+
+    <!-- pagination attributes -->
+
+    <aura:attribute name="pageNumber"
+                    type="Integer"
+                    default="1"
+                    description="For pagination, which page of records to display."/>
+
+    <aura:attribute name="pageSize"
+                    type="Integer"
+                    default="25"
+                    description="For pagination, how many records per page to display."/>
+
+    <aura:attribute name="sortColumnName"
+                    type="String"
+                    description="For sorting, last known requested sort preference. A value that matches the name attribute of a DataTableColumnCmp."/>
+
+    <aura:attribute name="sortDirection"
+                    type="String"
+                    description="For sorting, last known requested sort preference. Value must be 'asc' or 'desc'."/>
+
+    <!-- style attributes -->
+
+    <aura:attribute name="tableClass"
+                    type="String"
+                    default="slds-table slds-table--bordered slds-table--fixed-layout"
+                    description="CSS classes to apply to table tag."/>
+
+    <aura:attribute name="tableHeaderRowClass"
+                    type="String"
+                    default="slds-text-title--caps"
+                    description="CSS classes to apply to table TR tags in THEAD section."/>
+
+    <aura:attribute name="tableBodyRowClass"
+                    type="String"
+                    default="slds-hint-parent"
+                    description="CSS classes to apply to table TR tags in TBODY section."/>
+
+    <!-- private attributes -->
+
+    <aura:attribute name="scrollCheckIntervalId"
+                    type="String"
+                    description="In the renderer.js, the interval id for periodically checking scroll position. Used when unrendering component to cancel interval check."
+                    access="private"/>
+
+    <!-- events -->
+
+    <aura:registerEvent name="pageChangeEvent" type="c:DataTablePageChangeEvent"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- markup -->
+
+    <table class="{!v.tableClass}" role="grid">
+        <thead>
+            <tr class="{!v.tableHeaderRowClass}">
+                <aura:iteration items="{!v.columns}" var="column">
+                    {!column}
+                </aura:iteration>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.rows}" var="row" indexVar="rowIdx">
+                <tr class="{!v.tableBodyRowClass}">
+                    <aura:iteration items="{!v.columns}" var="column" indexVar="colIdx">
+                        <td role="gridcell" data-label="{!column.label}">
+                            <c:DataTableCellCmp row="{!row}"
+                                                rowIdx="{!rowIdx}"
+                                                column="{!column}"
+                                                colIdx="{!colIdx}"/>
+                        </td>
+                    </aura:iteration>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+
+</aura:component>
