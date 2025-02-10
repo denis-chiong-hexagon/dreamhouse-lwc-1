@@ -1,0 +1,37 @@
+<!--  Using Standard List Controller with pagination and bulk actions -->
+<apex:page standardController="Account" recordSetVar="accounts">
+    <apex:form>
+        <apex:pageBlock>
+            <apex:commandButton value="Delete" action="{!delete}" />
+
+            <apex:commandButton value="Edit" action="{!edit}" />
+
+            <apex:commandButton
+                value="New"
+                action="{!URLFOR($Action.Account.New)}"
+            />
+        </apex:pageBlock>
+        <apex:pageBlock title="Accounts">
+            <apex:pageBlockTable value="{!accounts}" var="a">
+                <apex:column>
+                    <apex:inputCheckbox />
+                </apex:column>
+                <apex:column value="{!a.Name}" />
+                <apex:column value="{!a.Phone}" />
+                <apex:column value="{!a.Type}" />
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandLink
+                    action="{!previous}"
+                    value="Previous"
+                    rendered="{!hasPrevious}"
+                />
+                <apex:commandLink
+                    action="{!next}"
+                    value="Next"
+                    rendered="{!hasNext}"
+                />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

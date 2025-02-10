@@ -103,18 +103,25 @@ export default class DragAndDrop extends LightningElement {
     }
 
     reorder() {
-        // Swap the sequence numbers between the source & destination item and sort them
-        let oldOptions = this.options;
-        oldOptions.forEach((element) => {
-            if (element.id === this.dragSource.id) {
-                element.sequence = parseInt(this.dropDestination.sequence, 10);
-            }
-            if (element.id === this.dropDestination.id) {
-                element.sequence = parseInt(this.dragSource.sequence, 10);
-            }
+        let oldOptions = [...this.options];
+        let draggedIndex = oldOptions.findIndex(
+            (opt) => opt.id === this.dragSource.id
+        );
+        let dropIndex = oldOptions.findIndex(
+            (opt) => opt.id === this.dropDestination.id
+        );
+
+        if (draggedIndex === dropIndex) return; // No movement needed
+
+        let draggedItem = oldOptions.splice(draggedIndex, 1)[0]; // Remove the dragged item
+        oldOptions.splice(dropIndex, 0, draggedItem); // Insert at the new position
+
+        // Reassign sequence numbers based on new order
+        oldOptions.forEach((item, index) => {
+            item.sequence = index + 1;
         });
+
         this.options = [...oldOptions];
-        this.sortOptions();
     }
 
     handleRemoveItem(event) {
